@@ -69,11 +69,11 @@ pipeline {
 			         docker push ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/repository/${env.NEW_IMAGE_REGISTRY_REPOSITORY}/${env.NEW_IMAGE_NAME}:${env.NEW_IMAGE_TAG}"""
             }
        }
-       stage('Update current gateway with the latest gateway image from nexus') {
-            steps {
+//       stage('Update current gateway with the latest gateway image from nexus') {
+//            steps {
 //                sh """kubectl get svc
 //                    kubectl set image deployment/gw-default gw=${env.NEW_IMAGE_REGISTRY_HOSTNAME}/repository/${env.NEW_IMAGE_REGISTRY_REPOSITORY}/${env.NEW_IMAGE_NAME}:${env.NEW_IMAGE_TAG}"""
-            }
-       }
+//            }
+//       }
     }
 }
