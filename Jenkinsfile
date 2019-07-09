@@ -38,7 +38,6 @@ pipeline {
 //                  sh """./gradlew -DimageName=${env.NEW_IMAGE_NAME} -DimageTag=${env.NEW_IMAGE_TAG} buildDockerImage"""
                   sh """docker pull caapim/gateway:latest
                             ./gradlew -DimageName=${env.NEW_IMAGE_NAME} -DimageTag=${env.NEW_IMAGE_TAG} buildDockerImage"""
-                  """
                   sh """./gradlew -DimageName=${env.NEW_IMAGE_NAME} -DimageTag=${env.NEW_IMAGE_TAG} buildDockerImage"""
             }
         }
@@ -62,19 +61,19 @@ pipeline {
                 }
 //                sh "docker stop ${env.GATEWAY_CONTAINER_ID}"
             }
-        }
+       }
 	   stage('Login Docker, Tag and push docker image to Nexus') {
             steps {
 		        sh """docker login ${env.NEW_IMAGE_REGISTRY_HOSTNAME} -u ${params.NEW_IMAGE_REGISTRY_USER} --password ${params.NEW_IMAGE_REGISTRY_PASSWORD}
                      docker tag ${env.NEW_IMAGE_NAME}:${env.NEW_IMAGE_TAG} ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/repository/${env.NEW_IMAGE_REGISTRY_REPOSITORY}/${env.NEW_IMAGE_NAME}:${env.NEW_IMAGE_TAG}
 			         docker push ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/repository/${env.NEW_IMAGE_REGISTRY_REPOSITORY}/${env.NEW_IMAGE_NAME}:${env.NEW_IMAGE_TAG}"""
             }
-        }
-        stage('Update current gateway with the latest gateway image from nexus') {
+       }
+       stage('Update current gateway with the latest gateway image from nexus') {
             steps {
                 sh """kubectl get svc
                     kubectl set image deployment/gw-default gw=${env.NEW_IMAGE_REGISTRY_HOSTNAME}/repository/${env.NEW_IMAGE_REGISTRY_REPOSITORY}/${env.NEW_IMAGE_NAME}:${env.NEW_IMAGE_TAG}"""
             }
-        }
+       }
     }
 }
