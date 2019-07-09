@@ -8,13 +8,13 @@ services:
     hostname: localhost
     image: caapim/gateway:9.4.00
     ports:
-    - "8080:8080"
-    - "8443:8443"
-    - "8000:8000"
+    - "28080:8080"
+    - "28443:8443"
+    - "28000:8000"
     volumes:
     - /opt/SecureSpan/Gateway/node/default/etc/bootstrap/services/restman
-    - ./build/gateway/<project.name>-<version>.gw7:/opt/docker/rc.d/deployment.gw7
-#    - ./src/main/gateway/config/env.properties:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/env.properties
+    - ./build/gateway/demo-1.0.0.gw7:/opt/docker/rc.d/deployment.gw7
+    - ./src/main/gateway/config/context-env.properties:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/context-env.properties
     secrets:
     - source: license
       target: /opt/SecureSpan/Gateway/node/default/etc/bootstrap/license/license.xml
@@ -22,6 +22,7 @@ services:
       ACCEPT_LICENSE: "true"
       SSG_ADMIN_USERNAME: "admin"
       SSG_ADMIN_PASSWORD: "password"
+#      ENV.CONTEXT_VARIABLE_PROPERTY.BackgroundEnvironmentService.color: "blue"
 secrets:
   license:
     file: ./docker/license.xml

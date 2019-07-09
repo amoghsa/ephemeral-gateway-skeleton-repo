@@ -13,8 +13,8 @@ buildscript {
     }
     dependencies {
 //        Use + for latest version. e.g. 0.6.+
-        classpath "com.ca.apim.gateway:gateway-developer-plugin:0.6.60"
-        classpath "com.ca.apim.gateway:gateway-export-plugin:0.6.60"
+        classpath "com.ca.apim.gateway:gateway-developer-plugin:0.8.+"
+        classpath "com.ca.apim.gateway:gateway-export-plugin:0.8.+"
     }
 }
 
@@ -25,17 +25,15 @@ plugins {
 apply plugin: 'com.ca.apim.gateway.gateway-export-plugin'
 apply plugin: 'com.ca.apim.gateway.gateway-developer-plugin'
 
-group '<group.id>'
+group 'broadcom'
 version = '1.0.0'
 
 GatewayConnection {
-    url = 'https://<gateway.host>:8443/restman'
-    userName = 'admin'
-    userPass = 'password'
+    url = 'https://localhost:18443/restman'
 }
 
 GatewayExportConfig {
-    folderPath = '/<folder.path>'
+    folderPath = '/'
 }
 
 repositories {

@@ -1,0 +1,18 @@
+TestFolder1/BackgroundService:
+  url: "/background"
+  policy: "TestFolder1/BackgroundService"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+TestFolder2/BackgroundEnvironmentService:
+  url: "/background_environment"
+  policy: "TestFolder2/BackgroundEnvironmentService"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
